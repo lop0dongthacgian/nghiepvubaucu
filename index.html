@@ -2,18 +2,23 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes"/>
   <title>Nghiệp vụ bầu cử cấp xã</title>
-  <!-- Tải PhotoSwipe từ CDN -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.css" />
+  <link rel="stylesheet" href="photoswipe.css" />
   <style>
-    body { margin: 0; background: #f0f4f8; }
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f0f4f8;
+      font-family: Arial, sans-serif;
+    }
     .header {
       text-align: center;
       padding: 12px;
       background: #0d3b66;
       color: white;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
+      font-weight: 600;
     }
     .page-info {
       text-align: center;
@@ -33,7 +38,7 @@
   <span id="current">1</span> / 40
 </div>
 
-<!-- PhotoSwipe root -->
+<!-- PhotoSwipe root element -->
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="pswp__bg"></div>
   <div class="pswp__scroll-wrap">
@@ -49,14 +54,16 @@
         <button class="pswp__button pswp__button--arrow--left" title="Trang trước"></button>
         <button class="pswp__button pswp__button--arrow--right" title="Trang sau"></button>
       </div>
-      <div class="pswp__caption"><div class="pswp__caption__center"></div></div>
+      <div class="pswp__caption">
+        <div class="pswp__caption__center"></div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- Tải PhotoSwipe JS từ CDN -->
-<script src="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.umd.js"></script>
+<script src="photoswipe.js"></script>
 <script>
+  // Tạo danh sách ảnh
   const items = [];
   for (let i = 1; i <= 40; i++) {
     items.push({
@@ -67,15 +74,35 @@
     });
   }
 
-  const pswp = new PhotoSwipe({
-    dataSource: { items },
-    pswpModule: PhotoSwipe
-  });
-  pswp.init();
+  // Khởi tạo PhotoSwipe
+  let currentPswp = null;
 
-  pswp.on('change', () => {
-    document.getElementById('current').textContent = pswp.currIndex + 1;
-  });
+  const openPhotoSwipe = () => {
+    const pswp = new PhotoSwipe({
+      dataSource: {
+        items: items
+      },
+      pswpModule: PhotoSwipe,
+      initialZoomLevel: 'fit', // Phù hợp với màn hình
+      secondaryZoomLevel: 2,  // Zoom 2x khi nhấn
+      maxZoomLevel: 3,
+      wheelToZoom: true,
+      pinchToClose: true,
+      closeOnVerticalDrag: false
+    });
+
+    pswp.init();
+
+    // Cập nhật số trang
+    pswp.on('change', () => {
+      document.getElementById('current').textContent = pswp.currIndex + 1;
+    });
+
+    currentPswp = pswp;
+  };
+
+  // Mở ngay khi tải trang
+  document.addEventListener('DOMContentLoaded', openPhotoSwipe);
 </script>
 
 </body>
