@@ -1,108 +1,270 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes"/>
-  <title>Nghiệp vụ bầu cử cấp xã</title>
-  <link rel="stylesheet" href="photoswipe.css" />
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #f0f4f8;
-      font-family: Arial, sans-serif;
-    }
-    .header {
-      text-align: center;
-      padding: 12px;
-      background: #0d3b66;
-      color: white;
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-    .page-info {
-      text-align: center;
-      padding: 8px;
-      font-weight: bold;
-      color: #2d3748;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes"/>
+<title>Nghiệp vụ bầu cử cấp xã</title>
+<link rel="stylesheet" href="https://unpkg.com/photoswipe@5.4.3/dist/photoswipe.css">
+<style>
+:root {
+  --primary-color: #0d3b66;
+  --accent-color: #f4d35e;
+  --bg-color: #f0f4f8;
+  --text-color: #2d3748;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-color);
+  font-family: -apple-system, system-ui, sans-serif;
+  color: var(--text-color);
+}
+
+/* Header */
+.header {
+  text-align: center;
+  padding: 30px 20px;
+  background: var(--primary-color);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.header h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.header p {
+  margin: 10px 0 0;
+  opacity: 0.9;
+  font-size: 1rem;
+}
+
+/* Container chung */
+.container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 0 15px 50px;
+}
+
+/* Tiêu đề mục lục */
+.menu-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  color: var(--primary-color);
+}
+.menu-title::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 20px;
+  background: var(--accent-color);
+  margin-right: 10px;
+}
+
+/* Menu mục lục chi tiết (theo ảnh) */
+.detailed-toc {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  margin-bottom: 20px;
+}
+.detailed-toc h2 {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--primary-color);
+}
+.toc-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #edf2f7;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+.toc-item:last-child {
+  border-bottom: none;
+}
+.toc-item .roman {
+  font-weight: bold;
+  min-width: 30px;
+  text-align: right;
+}
+.toc-item .title {
+  flex: 1;
+  padding: 0 15px;
+  text-align: left;
+}
+.toc-item .page {
+  font-weight: bold;
+  color: #718096;
+  min-width: 70px;
+  text-align: right;
+}
+.toc-item:hover {
+  background: #fdfdfd;
+  cursor: pointer;
+}
+
+/* Menu chính (các phần lớn) */
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.menu-item {
+  background: white;
+  padding: 16px 20px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: all 0.2s ease;
+  border: 1px solid rgba(0,0,0,0.05);
+  cursor: pointer;
+}
+.menu-item:active {
+  transform: scale(0.98);
+  background: #fdfdfd;
+}
+.menu-item .title {
+  font-weight: 500;
+  flex: 1;
+  padding-right: 15px;
+  line-height: 1.4;
+}
+.menu-item .page-num {
+  font-size: 0.85rem;
+  background: #edf2f7;
+  padding: 4px 10px;
+  border-radius: 20px;
+  color: #718096;
+  font-weight: bold;
+}
+
+/* Tùy chỉnh PhotoSwipe */
+.pswp__bg { background: #e1e4e8 !important; }
+.pswp__img { box-shadow: 0 4px 20px rgba(0,0,0,0.15) !important; }
+</style>
 </head>
 <body>
-
 <div class="header">
-  Nghiệp vụ công tác bầu cử đại biểu HĐND cấp xã<br>Nhiệm kỳ 2026–2031
+  <h1>Nghiệp vụ bầu cử</h1>
+  <p>Đại biểu HĐND cấp xã nhiệm kỳ 2026–2031</p>
 </div>
 
-<div class="page-info">
-  <span id="current">1</span> / 40
-</div>
+<div class="container">
 
-<!-- PhotoSwipe root element -->
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="pswp__bg"></div>
-  <div class="pswp__scroll-wrap">
-    <div class="pswp__container">
-      <div class="pswp__item"></div>
-      <div class="pswp__item"></div>
-      <div class="pswp__item"></div>
+  <!-- Mục lục chi tiết (theo ảnh) -->
+  <div class="menu-title">MỤC LỤC CHI TIẾT</div>
+  <div class="detailed-toc">
+    <h2>MỤC LỤC</h2>
+    <div class="toc-item" onclick="openBook(3)"> <!-- Trang 4 -->
+      <span class="roman">I</span>
+      <span class="title">DANH SÁCH THÀNH VIÊN BAN BẦU CỬ</span>
+      <span class="page">Trang 4</span>
     </div>
-    <div class="pswp__ui pswp__ui--hidden">
-      <div class="pswp__top-bar">
-        <div class="pswp__counter"></div>
-        <button class="pswp__button pswp__button--close" title="Đóng"></button>
-        <button class="pswp__button pswp__button--arrow--left" title="Trang trước"></button>
-        <button class="pswp__button pswp__button--arrow--right" title="Trang sau"></button>
-      </div>
-      <div class="pswp__caption">
-        <div class="pswp__caption__center"></div>
-      </div>
+    <div class="toc-item" onclick="openBook(4)"> <!-- Trang 5 -->
+      <span class="roman">II</span>
+      <span class="title">ĐƠN VỊ BẦU CỬ, SỐ ĐẠI BIỂU ĐƯỢC BẦU Ở MỖI ĐƠN VỊ</span>
+      <span class="page">Trang 5</span>
+    </div>
+    <div class="toc-item" onclick="openBook(4)"> <!-- Trang 5 -->
+      <span class="roman">III</span>
+      <span class="title">NHIỆM VỤ, QUYỀN HẠN CỦA BAN BẦU CỬ VÀ TRÁCH NHIỆM CỦA THÀNH VIÊN BAN BẦU CỬ</span>
+      <span class="page">Trang 5</span>
+    </div>
+    <div class="toc-item" onclick="openBook(5)"> <!-- Trang 6 -->
+      <span class="roman">IV</span>
+      <span class="title">CÁC PHIÊN HỌP CỦA BAN BẦU CỬ</span>
+      <span class="page">Trang 6</span>
+    </div>
+    <div class="toc-item" onclick="openBook(7)"> <!-- Trang 8 -->
+      <span class="roman">V</span>
+      <span class="title">KIỂM TRA, ĐÔN ĐỐC TRIỂN KHAI CÔNG TÁC BẦU CỬ</span>
+      <span class="page">Trang 8</span>
+    </div>
+    <div class="toc-item" onclick="openBook(8)"> <!-- Trang 9 -->
+      <span class="roman">VI</span>
+      <span class="title">CHẾ ĐỘ THÔNG TIN, BÁO CÁO CỦA BAN BẦU CỬ</span>
+      <span class="page">Trang 9</span>
+    </div>
+    <div class="toc-item" onclick="openBook(8)"> <!-- Trang 9 -->
+      <span class="roman">VII</span>
+      <span class="title">DẤU CỦA BAN BẦU CỬ</span>
+      <span class="page">Trang 9</span>
+    </div>
+    <div class="toc-item" onclick="openBook(8)"> <!-- Trang 9 -->
+      <span class="roman">VIII</span>
+      <span class="title">HƯỚNG DẪN LẬP, NIÊM YẾT DANH SÁCH VÀ CẤP THẺ CỬ TRI</span>
+      <span class="page">Trang 9</span>
+    </div>
+    <div class="toc-item" onclick="openBook(9)"> <!-- Trang 10 -->
+      <span class="roman">IX</span>
+      <span class="title">HƯỚNG DẪN VỀ HÒM PHIẾU, NIÊM YẾT DANH SÁCH, TIỂU SỬ TÓM TẮT NHỮNG NGƯỜI ỨNG CỬ ĐẠI BIỂU HỘI ĐỒNG NHÂN DÂN CẤP XÃ NHIỆM KỲ 2026 - 2031 VÀ BỐ TRÍ ĐỊA ĐIỂM BỎ PHIẾU</span>
+      <span class="page">Trang 10</span>
+    </div>
+    <div class="toc-item" onclick="openBook(9)"> <!-- Trang 10 -->
+      <span class="roman">X</span>
+      <span class="title">GIẢI QUYẾT KHIẾU NẠI, TỐ CÁO</span>
+      <span class="page">Trang 10</span>
+    </div>
+    <div class="toc-item" onclick="openBook(11)"> <!-- Trang 12 -->
+      <span class="roman">XI</span>
+      <span class="title">HƯỚNG DẪN KIỂM PHIẾU; SỬ DỤNG CÁC LOẠI BIÊN BẢN TRONG CÔNG TÁC BẦU CỬ VÀ QUY TRÌNH CHUYỂN GIAO BIÊN BẢN; XÁC ĐỊNH KẾT QUẢ BẦU CỬ VÀ CÔNG BỐ KẾT QUẢ BẦU CỬ</span>
+      <span class="page">Trang 12</span>
+    </div>
+    <div class="toc-item" onclick="openBook(11)"> <!-- Trang 12 -->
+      <span class="roman">XII</span>
+      <span class="title">MẪU BIÊN BẢN XÁC ĐỊNH KẾT QUẢ BẦU CỬ ĐẠI BIỂU HỘI ĐỒNG NHÂN DÂN CẤP XÃ</span>
+      <span class="page">Trang 12</span>
+    </div>
+    <div class="toc-item" onclick="openBook(15)"> <!-- Trang 16 -->
+      <span class="roman">XIII</span>
+      <span class="title">MỘT SỐ VĂN BẢN HƯỚNG DẪN NGHIỆP VỤ</span>
+      <span class="page">Trang 16</span>
     </div>
   </div>
-</div>
 
-<script src="photoswipe.js"></script>
-<script>
-  // Tạo danh sách ảnh
-  const items = [];
-  for (let i = 1; i <= 40; i++) {
-    items.push({
-      src: `pages/${i}.png`,
-      w: 1653,
-      h: 2337,
-      title: `Trang ${i}`
-    });
-  }
+  
 
-  // Khởi tạo PhotoSwipe
-  let currentPswp = null;
+<script type="module">
+import PhotoSwipeLightbox from 'https://unpkg.com/photoswipe@5.4.3/dist/photoswipe-lightbox.esm.js';
 
-  const openPhotoSwipe = () => {
-    const pswp = new PhotoSwipe({
-      dataSource: {
-        items: items
-      },
-      pswpModule: PhotoSwipe,
-      initialZoomLevel: 'fit', // Phù hợp với màn hình
-      secondaryZoomLevel: 2,  // Zoom 2x khi nhấn
-      maxZoomLevel: 3,
-      wheelToZoom: true,
-      pinchToClose: true,
-      closeOnVerticalDrag: false
-    });
+// Cấu hình 40 trang ảnh
+const images = [];
+for (let i = 1; i <= 40; i++) {
+  images.push({
+    src: `pages/${i}.png`,
+    width: 1653,
+    height: 2337,
+    alt: `Trang ${i}`
+  });
+}
 
-    pswp.init();
+const lightbox = new PhotoSwipeLightbox({
+  dataSource: images,
+  pswpModule: () => import('https://unpkg.com/photoswipe@5.4.3/dist/photoswipe.esm.js'),
+  padding: { top: 20, bottom: 20, left: 10, right: 10 },
+});
 
-    // Cập nhật số trang
-    pswp.on('change', () => {
-      document.getElementById('current').textContent = pswp.currIndex + 1;
-    });
+lightbox.init();
 
-    currentPswp = pswp;
-  };
-
-  // Mở ngay khi tải trang
-  document.addEventListener('DOMContentLoaded', openPhotoSwipe);
+// Hàm mở sách tại trang cụ thể (số trang bắt đầu từ 0)
+window.openBook = (pageIndex) => {
+  lightbox.loadAndOpen(pageIndex);
+};
 </script>
 
 </body>
