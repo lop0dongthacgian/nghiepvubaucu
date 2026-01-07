@@ -156,6 +156,71 @@ body {
 /* Tùy chỉnh PhotoSwipe */
 .pswp__bg { background: #e1e4e8 !important; }
 .pswp__img { box-shadow: 0 4px 20px rgba(0,0,0,0.15) !important; }
+
+/* ===== Trang bìa có chữ đè ===== */
+.cover-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.cover-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Khối chữ giữa ảnh */
+.cover-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  text-align: center;
+  font-family: "Times New Roman", serif;
+}
+
+/* Dòng THÔNG TIN */
+.line-red {
+  color: #c40000;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+/* Nội dung chính */
+.line-blue {
+  color: #0d3b66;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+/* Ghi chú */
+.line-note {
+  margin-top: 22px;
+  font-size: 16px;
+  font-style: italic;
+  color: #0d3b66;
+}
+
+@media (max-width: 480px) {
+  .line-red {
+    font-size: 20px;
+  }
+
+  .line-blue {
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: 0.3px;
+    word-break: break-word;
+  }
+
+  .line-note {
+    font-size: 13px;
+  }
+}
 </style>
 </head>
 <body>
@@ -163,7 +228,21 @@ body {
   <h1>Nghiệp vụ bầu cử</h1>
   <p>Đại biểu HĐND cấp xã nhiệm kỳ 2026–2031</p>
 </div>
-<img src="pages/img.png" alt="Hình trang" style="width:100%; height:auto; display:block; margin:0; padding:0;">
+<div class="cover-wrapper">
+  <img src="pages/img.png" alt="Hình nền">
+
+  <div class="cover-text">
+    <div class="line-red">THÔNG TIN</div>
+
+    <div class="line-blue">
+      PHỤC VỤ HOẠT ĐỘNG CỦA<br>
+      BAN BẦU CỬ ĐẠI BIỂU HỘI ĐỒNG NHÂN DÂN<br>
+      CẤP XÃ NHIỆM KỲ 2026 – 2031
+    </div>
+
+    <div class="line-note">(Tài liệu lưu hành nội bộ)</div>
+  </div>
+</div>
 <div class="container">
 
   <!-- Mục lục chi tiết (theo ảnh) -->
